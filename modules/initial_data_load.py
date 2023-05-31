@@ -50,7 +50,7 @@ def refresh_data_tables():
             trading_days["end_of_week"] = np.where(trading_days['dates'].dt.dayofweek == 4, True,False)
             trading_days = trading_days.drop(columns=['weekday'])
             trading_days["end_of_month"] = np.where(((trading_days['dates'].dt.month != trading_days['dates'].shift(-1).dt.month) |
-                                                     (trading_days['dates']==(trading_days['dates'].max()-dt.timedelta(days=1)))) &
+                                                     (trading_days['dates']==(trading_days['dates'].iloc[-2]))) &
                                                      (trading_days['dates']!=trading_days['dates'].max()), True,False)
         
         # Export to csv file

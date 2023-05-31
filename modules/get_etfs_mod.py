@@ -12,12 +12,16 @@ import yfinance as yf
 import scipy as sc
 yf.pdr_override()
 
+#turn off warning signs for cleaner code
+from warnings import filterwarnings
+filterwarnings("ignore")
+
 def get_etf_data():
     # Get today's date
     today = dt.date.today()
 
     # List of ETF. Each ETF represents one of 11 sectors
-    etf_list = ['XLE','XLB','XLI','XLU','VHT','XLF','XLY','VDC','VGT','EWCO','XLRE']
+    etf_list = ['XLE','XLB','XLI','XLU','VHT','XLF','XLY','VDC','VGT','VOX','IYR']
 
     # Set Start and End Dates
     end = dt.date.today().strftime('%Y-%m-%d')
@@ -39,9 +43,15 @@ def get_etf_data():
 
     learning_df = pd.DataFrame()
     learning_df.index = etf_data.index
+    future_y_df = pd.DataFrame()
+    future_y_df.index = etf_data.index
 
     # Create fundamentals for each stock
     for etf in etf_list:
+        # Get etf prices
+        temp = etf
+        future_y_df[temp] = etf_data[etf]
+        
         # get 3 day moving average for etf
         temp = etf+'_3ma_pct'
         learning_df[temp] = (etf_data[etf].rolling(window=3).mean()/etf_data[etf]) - 1
@@ -64,7 +74,8 @@ def get_etf_data():
         temp_change = etf_data[etf].pct_change()
         temp = etf+'_cum_month'
         learning_df[temp] = ((temp_change+1).rolling(window=21).apply(np.prod, raw=True)-1)
-
+        
+    learning_df = learning_df.append(future_y_df)
     learning_df = learning_df.dropna()
 
     # Export to csv file
