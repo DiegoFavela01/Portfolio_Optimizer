@@ -12,9 +12,9 @@ The following strategy is not necessarily designed to beat the S&P 500, but rath
 
 We accomplish this using 2 different strategies
 ### S&P 500 Optimization Strategy:
-The S&P 500 Optimization Strategy takes a 6 month lookback at the performance of the S&P 500 stocks. It then calculate the most optimal portfolio by adjusting the weights of each stock until the sharpe ratio for that period has been maximized. The strategy is reblanced on a monthly basis and individual stock weights are rebalanced between 0%-5%. In addition, volatility is limited so as not to exceed the S&P.
+The S&P 500 Optimization Strategy takes a 6 month lookback at the performance of the S&P 500 stocks. It then calculate the most optimal portfolio by adjusting the weights of each stock until the sharpe ratio for that period has been maximized. The strategy is rebalanced on a monthly basis and individual stock weights are rebalanced between 0%-5%. In addition, volatility is limited so as not to exceed the S&P.
 ### Predictive Sector ETF Strategy:
-The predictive ETF portfolio strategy utilizes predictive machine learning. Using 20 years of historical stock and economic data, the monthly returns for 11 ETFs (representing S&P 500 market sectors) are predicted. These predictions are then used to calculate the most efficent portfolio by finding the optimal portfolio weights, which will maximize the portfolio's sharpe ratio. The strategy is reblanced on a monthly basis and individual ETF weights are rebalanced between 1%-40%. In addition, volatility is limited so as not ot exceed the S&P 500.
+The predictive ETF portfolio strategy utilizes predictive machine learning. Using 20 years of historical stock and economic data, the monthly returns for 11 ETFs (representing S&P 500 market sectors) are predicted. These predictions are then used to calculate the most efficient portfolio by finding the optimal portfolio weights, which will maximize the portfolio's sharpe ratio. The strategy is rebalanced on a monthly basis and individual ETF weights are rebalanced between 1%-40%. In addition, volatility is limited so as not to exceed the S&P 500.
 
 ### Inputs:
 + FRED Economic Variables
@@ -43,12 +43,14 @@ This project leverages Python 3.8.0 with the following packages:
 + scikit-learn == 1.1.3
 + streamlit == 1.18.1
 + scipy == 1.9.3
++ pyfolio == 0.9.2
 
 
 ### Installation Guide (Windows)
 
 1.  Open a terminal or command prompt on your computer.
-2.  Install all packages by running the commands: 
+2.  Install all packages by running the commands:
+    (Note: Python pyfolio package currently has a bug, you'll need to load directly from thier github where corrections have been made)
 
 ```bash
   pip install pandas==1.5.0
@@ -62,6 +64,7 @@ This project leverages Python 3.8.0 with the following packages:
   pip install yfinance==0.2.9
   pip install requests==2.28.2
   pip install streamlit==1.18.1
+  pip install git+https://github.com/quantopian/pyfolio
 ```
 3. In your terminal run the following code to copy the repository:
 ```bash

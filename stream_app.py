@@ -1,7 +1,12 @@
 import streamlit as st
+import pyfolio as py
 from streamlit_pages.home import render_home
 from streamlit_pages.files import render_files
 from streamlit_pages.about import render_about
+
+# turn off warning signs for cleaner code
+from warnings import filterwarnings
+filterwarnings("ignore")
 
 # Function to render the navigation menu
 def render_navigation_menu():

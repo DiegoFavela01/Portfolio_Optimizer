@@ -1,4 +1,11 @@
 import streamlit as st
+import pyfolio as pf
+import matplotlib
+import matplotlib.pyplot as plt
+
+# turn off warning signs for cleaner code
+from warnings import filterwarnings
+filterwarnings("ignore")
 
 def render_home():
     # Get strategies
@@ -20,11 +27,54 @@ def render_home():
     run_it = st.button("Run Strategy")
     
     if run_it and strategy == 'S&P 500 Optimization Strategy':
-        opt_pct = 0
-        st.progress(opt_pct, text="Renning Model")
+        # Create Portfolio Return Graphs
         portfolio_returns = optimizer_strategy()
+        st.write("Return Based Graphs")
+        return_graphs = plt.figure()
+        plt.subplot(2,1,1)
+        pf.plot_rolling_returns(portfolio_returns['port_return'], factor_returns = portfolio_returns['bench_return'])
+        plt.subplot(2,1,2)
+        pf.plot_annual_returns(portfolio_returns,  )
+        plt.tight_layout()
+        st.pyplot(return_graphs)
+        # Create portfolio Risk Graphs
+        st.write("Risk Based Graphs")
+        risk_graph = plt.figure()
+        plt.subplot(2,1,1)
+        pf.plot_rolling_sharpe(portfolio_returns['port_return'], factor_returns = portfolio_returns['bench_return'], rolling_window = 252)
+        plt.subplot(2,1,2)
+        pf.plot_rolling_volatility(portfolio_returns['port_return'], factor_returns = portfolio_returns['bench_return'], rolling_window=126)
+        plt.tight_layout()
+        st.pyplot(risk_graph)
+        # Create tearsheet
+        fig = pf.create_returns_tear_sheet(portfolio_returns['port_return'], benchmark_rets = portfolio_returns['bench_return'], return_fig=True)
+        # Store plots in a file
+        file_name = "images/S&P_500_Optimization_Strategy_tearsheet.pdf"
+        fig.savefig(file_name, format="pdf")
+
+
     elif run_it and strategy == 'Predictive ETF Portfolio Strategy':
-        portfolio_returns = etf_strategy()
-        
-        
-        st.write("All Done")
+        # Create Portfolio Return Graphs
+        portfolio_returns = optimizer_strategy()
+        st.write("Return Based Graphs")
+        return_graphs = plt.figure()
+        plt.subplot(2,1,1)
+        pf.plot_rolling_returns(portfolio_returns['port_return'], factor_returns = portfolio_returns['bench_return'])
+        plt.subplot(2,1,2)
+        pf.plot_annual_returns(portfolio_returns,  )
+        plt.tight_layout()
+        st.pyplot(return_graphs)
+        # Create portfolio Risk Graphs
+        st.write("Risk Based Graphs")
+        risk_graph = plt.figure()
+        plt.subplot(2,1,1)
+        pf.plot_rolling_sharpe(portfolio_returns['port_return'], factor_returns = portfolio_returns['bench_return'], rolling_window = 252)
+        plt.subplot(2,1,2)
+        pf.plot_rolling_volatility(portfolio_returns['port_return'], factor_returns = portfolio_returns['bench_return'], rolling_window=126)
+        plt.tight_layout()
+        st.pyplot(risk_graph)
+        # Create tearsheet
+        fig = pf.create_returns_tear_sheet(portfolio_returns['port_return'], benchmark_rets = portfolio_returns['bench_return'], return_fig=True)
+        # Store plots in a file
+        file_name = "images/S&P_500_Optimization_Strategy_tearsheet.pdf"
+        fig.savefig(file_name, format="pdf")
