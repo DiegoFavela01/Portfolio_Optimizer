@@ -17,7 +17,7 @@ def get_econ_data ():
     # select tables, enter as dataframe
     list_of_pct_tables = ['EFFR', 'FEDFUNDS', 'CSUSHPINSA', 'T10YIEM', 'T5YIEM', 'PSAVERT', 'CIVPART', 'TB3MS', 'REAINTRATREARAT10Y', 'MORTGAGE30US']
     # AAA - BBB is spread
-    lisf_of_val_tables = ['EFFR', 'T10Y3MM', 'UNRATE', 'H8B1058NCBCMG','RECPROUSM156N', 'SAHMREALTIME', 'CSUSHPINSA', 'INDPRO', 'HOUST', 'TOTALSA', 'MSACSR', 'DSPIC96', 'RSXFS', 'PMSAVE']
+    lisf_of_val_tables = ['EFFR', 'IPUTIL', 'GASREGW', 'T10Y3MM', 'UNRATE', 'H8B1058NCBCMG','RECPROUSM156N', 'SAHMREALTIME', 'CSUSHPINSA', 'INDPRO', 'HOUST', 'TOTALSA', 'MSACSR', 'DSPIC96', 'RSXFS', 'PMSAVE']
     econ_df_pct = pdr.DataReader(list_of_pct_tables, 'fred', start_str, end_str)
     econ_df_val = pdr.DataReader(lisf_of_val_tables, 'fred', start_str, end_str)
     

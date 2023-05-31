@@ -93,7 +93,7 @@ def prep_and_train(stock_data, x):
             nn = Sequential()
 
             # add input layer
-            nn.add(Dense(units=150, input_dim=66, activation="relu"))
+            nn.add(Dense(units=150, input_dim=91, activation="relu"))
             # add first hidden layer
             nn.add(Dense(units=250, activation="relu"))
             # Output layer

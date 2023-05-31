@@ -74,8 +74,8 @@ def get_etf_data():
         temp_change = etf_data[etf].pct_change()
         temp = etf+'_cum_month'
         learning_df[temp] = ((temp_change+1).rolling(window=21).apply(np.prod, raw=True)-1)
-        
-    learning_df = learning_df.append(future_y_df)
+    
+    learning_df = pd.concat([learning_df,future_y_df], axis=1)
     learning_df = learning_df.dropna()
 
     # Export to csv file
