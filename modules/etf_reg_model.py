@@ -12,9 +12,9 @@ import scipy as sc
 yf.pdr_override()
 
 # Get modules
-from initial_data_load import refresh_data_tables
-from econ_mod import get_econ_data
-from get_etfs_mod import get_etf_data
+from modules.initial_data_load import refresh_data_tables
+from modules.econ_mod import get_econ_data
+from modules.get_etfs_mod import get_etf_data
 
 # Packages related to machine learning and for nueral networs
 import tensorflow as tf

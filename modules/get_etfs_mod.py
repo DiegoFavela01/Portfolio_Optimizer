@@ -79,7 +79,7 @@ def get_etf_data():
     learning_df = learning_df.dropna()
 
     # Export to csv file
-    csv_path = f"../csv_files/etf_{today}.csv"
+    csv_path = f"csv_files/etf_{today}.csv"
     learning_df.to_csv(csv_path)
 
     return learning_df

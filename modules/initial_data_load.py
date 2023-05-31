@@ -13,8 +13,8 @@ import scipy as sc
 yf.pdr_override()
 
 # Load modules for ETFs and Econ Data
-from get_etfs_mod import get_etf_data
-from econ_mod import get_econ_data
+from modules.get_etfs_mod import get_etf_data
+from modules.econ_mod import get_econ_data
 
 
 def refresh_data_tables():
@@ -22,12 +22,12 @@ def refresh_data_tables():
     today = dt.date.today()
 
     # Checks to see if the files have already been updated today
-    if not exists(f"../csv_files/trade_dates_{today}.csv"):
+    if not exists(f"csv_files/trade_dates_{today}.csv"):
         # remove old files from the folder to make room for new files
-        files_list = os.listdir("../csv_files")
+        files_list = os.listdir("csv_files")
         for i in files_list:
             if i[-3:] == 'csv':
-                os.remove(f"../csv_files/{i}")
+                os.remove(f"csv_files/{i}")
 
         # function that pull the list of active trading days, and creates flags for end and month and end of week.
         def get_trading_days():
@@ -54,7 +54,7 @@ def refresh_data_tables():
                                                      (trading_days['dates']!=trading_days['dates'].max()), True,False)
         
         # Export to csv file
-            csv_path = f"../csv_files/trade_dates_{today}.csv"
+            csv_path = f"csv_files/trade_dates_{today}.csv"
             trading_days.to_csv(csv_path)
 
             return trading_days
@@ -103,7 +103,7 @@ def refresh_data_tables():
             stock_data.index = dates
 
         # Export to csv file
-            csv_path = f"../csv_files/snp_500_stocks_{today}.csv"
+            csv_path = f"csv_files/snp_500_stocks_{today}.csv"
             stock_data.to_csv(csv_path)
 
             return stock_data
@@ -124,7 +124,7 @@ def refresh_data_tables():
             monthly_returns = monthly_returns.dropna(axis=0, how="all")
 
         # Export to csv file
-            csv_path = f"../csv_files/monthly_returns_{today}.csv"
+            csv_path = f"csv_files/monthly_returns_{today}.csv"
             monthly_returns.to_csv(csv_path)
 
             return monthly_returns

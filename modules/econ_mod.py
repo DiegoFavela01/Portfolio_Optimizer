@@ -29,7 +29,7 @@ def get_econ_data ():
     econ_df_val = econ_df_val.drop(columns=['EFFR'])
     
     # Get monthly dates
-    trading_days = pd.read_csv(f"../csv_files/trade_dates_{today}.csv", index_col=0)
+    trading_days = pd.read_csv(f"csv_files/trade_dates_{today}.csv", index_col=0)
     # get end of months for reference
     month_ends = trading_days[trading_days['end_of_month']==True]["dates"]
     month_ends = pd.to_datetime(month_ends)
@@ -64,7 +64,7 @@ def get_econ_data ():
     econ_df.index = econ_df.index.date
     
     # Export to csv file
-    csv_path = f"../csv_files/econ_data_{today}.csv"
+    csv_path = f"csv_files/econ_data_{today}.csv"
     econ_df.to_csv(csv_path)
 
     return econ_df
