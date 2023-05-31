@@ -75,33 +75,26 @@ This project leverages Python 3.8.0 with the following packages:
 ## Background Modules
 In the background several modules run to provide our models. 
 
-vix_mod
->This plugin pulls historical vix data and pricing. Uses kmeans to label vix data as "high," "medium," and "low" volatility.
-
-spy_mod
->This plugin pulls historical SPDR S&P 500 ETF Trust (SPY) data and generates market indicators and financial ratios.
+initital_data_load
+>This module pulls the all the required data and loads it into csv files that can be pulled later. Because loading large API files can be time consuming we have chosen to load files into csv files. We then implemented an if statement that checks to see if the files have been updated for the day. If they have then there is no need to run the APIs again.
 
 econ_mod
->This plugin pulls economic data from the Federal Reserve Economic Data.
+>This plugin uses the FRED database to pull historical economic indicators. These indicators are then saved to a csv, so that they can later be pulled more easily. Further on, these indicators are merged with the ETF returns and used to train our predictive model.
 
-sent_mod
->This plugin pulls news headlines for the SPY and groups them by day. It then performs sentiment analysis to give a sentiment score betweeo -1 and 1 (-1 being most negative and 1 being most positive)
+get_etfs_mod
+>This plugin pulls etf values for 11 etfs. A loop is then run to create several columns used for our machine learning model.
 
-create_train_test_mod
->This module pulls the data gathered from the vix_mod, spy_mod, econ_mod and sent_mod and compiles them into a single table. In addition it also prepares the X and y tables needed for training and testing
+etf_reg_model
+>This plugin houses the nueral network machine learning model used to predict the returns of the sector ETFs. It uses data from FRED and fundemental stock performance analysis.
 
-train_scaled_mod
->This module scales the training data.
+etf_strategy_loop
+>This plugin gathers all the respective ETF, economic data and the machine learning model. It then runds the model through a loop appending the results to a return table, which is used to calculate the holdings and returns for our strategy. 
 
-test_scaled_mod
->This module scales the testing data.
+sh_optimizer & sh_optimizer_etf
+> These are function that get entered into scripy to optimize the portfolio's sharpe ratio. Two different functions are created because the parameters change slight between the S&P 500 stock model and the ETF model.
 
-nn_model_mod
->This module call forth a neural network regression model. This model is trained and fit using the scaled training data. Due to the inconsistancy of nueral network models, the models are set in loops, which will end when certain training requirements are met.
-
-nn_class_model_mod
->This module call forth a neural network classification model. This model is trained and fit using the scaled training data. Due to the inconsistancy of nueral network models, the models are set in loops, which will end when certain training requirements are met.
----
+Optimizer_strategy_loop
+> This function runs teh sh_optimizer funtion through a loop. This is the basis that allows us to rebalance the portfolio on a monthly basis. 
 
 ## Summary
 
@@ -118,13 +111,17 @@ Both models use the idology that if an "up" day is predicted, the strategy is in
 
 ![Screenshot of Keras Classifier](class_plot.png)
 
+## Next Steps
+Give the available time and rescourse for this project we recogonize that major bias was overlook. The data is subject to servirorship bias. The S&P 500 Optimizer strategy uses current S&P500 stocks, because of this we are excluding stocks that may have been dropped due to poor performance. 
+
+We have looked into adding these stocks but historical data for delisted stocks is limited. We recognize this is a current limitation and shortcoming. 
+
 ---
 
 ## Contributors
 
 * Michael Roth
 * Diego Favela
-* Jonny Cruz
 
 ---
 
