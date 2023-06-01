@@ -151,12 +151,13 @@ def etf_strategy():
             final_port_return = final_port_return.append(portfolio_returns[['port_return']])
 
             # Update the optimizer status
-            opt_pct = min(opt_pct + (1/(runs-1)),1)
+            opt_pct = min(opt_pct + (1/(runs)),1)
             bar_lang = round(opt_pct*100,2)
             my_bar.progress(opt_pct, text=f"Training Model - {bar_lang}% Complete")
 
         # Add benchmark values
-        start = month_ends.iloc[1]
+        start = month_ends.iloc[0]
+        bench = bench.pct_change()
         final_port_return['bench_return'] = bench[start:]
         
         # Export to csv file

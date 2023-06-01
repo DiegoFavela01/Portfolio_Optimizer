@@ -7,6 +7,8 @@ from streamlit_pages.about import render_about
 from warnings import filterwarnings
 filterwarnings("ignore")
 
+st.set_page_config(page_title="Portfolio Optimizer")
+
 # Function to render the navigation menu
 def render_navigation_menu():
     st.sidebar.title("Navigation")

@@ -82,6 +82,7 @@ def render_home():
     elif run_it and strategy == 'Predictive ETF Portfolio Strategy':
         # Get Strategy Returns
         portfolio_returns = etf_strategy()
+        portfolio_returns = portfolio_returns.dropna()
         # Create Metrics
         port_metrics, bench_metrics = get_metrics(portfolio_returns)
         col1, col2 = st.columns(2)

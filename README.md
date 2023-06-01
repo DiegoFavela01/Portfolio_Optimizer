@@ -101,18 +101,15 @@ Optimizer_strategy_loop
 
 ## Summary
 
-Regardless of whether a regression or classification neural network model is used, the model often outperformed during times of high volatility.
+Both strategies over a 3 year time period begin to outperform the S&P 500 on both a return and risk adjusted return basis. Because both strategies use a historical risk correlation view, it is more difficult than expected to keep volatility in check. Specifically with the ETF strategy, the 11 sectors are highly correlated with the general market. In order to further reduce risk and increase diversification a fixed income / risk free asset asset would need to be added to the portfolio. However, both strategies were able to provide a better sharpe ratio than the S&P500 over a 3 year period.
 
-### Investment Strategy
-Both models use the idology that if an "up" day is predicted, the strategy is invested in 100% SPY, and if a "down" day is predicted, the portfolio is shorted at -50%. As a result, days where both models predict a downturn the portfolio takes a 100% short position. Days where the both models predict an "up" day the portfolio is leveraged at 100%, for 2x the return of SPY. When the models conflit the portfolio takes a defensive stance at a 50% exposure to SPY.
+### S&P 500 Optimization Model
 
-### Keras Regression Model
+![Screenshot of Optimizer Model](images/optimizer.png)
 
-![Screenshot of Keras Regression](reg_plot.png)
+### ETF Predictive Model
 
-### Keras Classifier Model
-
-![Screenshot of Keras Classifier](class_plot.png)
+![Screenshot of ETF Model](images/etfs.png)
 
 ## Next Steps
 Give the available time and rescourse for this project we recogonize that major bias was overlook. The data is subject to servirorship bias. The S&P 500 Optimizer strategy uses current S&P500 stocks, because of this we are excluding stocks that may have been dropped due to poor performance. 
