@@ -4,7 +4,7 @@ def render_about():
     st.title("About")
     st.markdown(
         """
-        Our program, developed by Diego Favela, Michael Roth, and Rachel Phillips, is designed to analyze and optimize the performance of individual stocks from the S&P 500 index. By leveraging data gathering, machine learning, and optimization techniques, we aim to provide valuable insights and help users make informed investment decisions.
+        Our program, developed by Diego Favela and Michael Roth, is designed to analyze and optimize the performance of individual stocks from the S&P 500 index. By leveraging data gathering, machine learning, and optimization techniques, we aim to provide valuable insights and help users make informed investment decisions.
         """
     )
 
